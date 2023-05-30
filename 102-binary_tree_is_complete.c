@@ -22,12 +22,12 @@ link_t *new_link(binary_tree_t *node)
 {
 	link_t *new_node = malloc(sizeof(link_t));
 	if (new_node == NULL)
-		return NULL;
+		return (NULL);
 
 	new_node->node = node;
 	new_node->next = NULL;
 
-	return new_node;
+	return (new_node);
 }
 
 /**
@@ -65,7 +65,7 @@ link_t *push(binary_tree_t *node, link_t *head, link_t **tail)
 
 	(*tail)->next = new_link_node;
 	*tail = new_link_node;
-	return new_link_node;
+	return (new_link_node);
 }
 
 /**
