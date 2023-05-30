@@ -45,5 +45,4 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
 int binary_tree_is_complete(const binary_tree_t *tree);
 
 
-
 #endif /* _BINARY_TREES_H_ */
