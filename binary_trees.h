@@ -20,6 +20,8 @@ typedef struct binary_tree_s
 } binary_tree_t;
 
 typedef struct binary_tree_s bst_t;
+typedef struct binary_tree_s avl_t;
+
 
 
 typedef struct link_s
@@ -64,7 +66,6 @@ bst_t *bst_remove(bst_t *root, int value);
 
 
 int binary_tree_is_avl(const binary_tree_t *tree);
-
 
 
 #endif /* _BINARY_TREES_H_ */
