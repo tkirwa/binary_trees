@@ -54,7 +54,6 @@ current = child;
 
 return (root);
 }
-
 /**
 * heap_extract - Extracts the root node of a Max Binary Heap
 * @root: Double pointer to the root node of the heap
