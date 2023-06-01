@@ -1,10 +1,10 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_size - Measure the size of a binary tree
- * @tree: Pointer to the root node of the tree
+ * binary_tree_size - Measures the size of a binary tree
+ * @tree: Pointer to the root node of the tree to measure
  *
- * Return: The size of the tree, or 0 if tree is NULL
+ * Return: Size of the tree
  */
 size_t binary_tree_size(const binary_tree_t *tree)
 {
@@ -15,72 +15,68 @@ return (1 + binary_tree_size(tree->left) + binary_tree_size(tree->right));
 }
 
 /**
- * heapify - Restore the Max Heap property by swapping nodes
- * @node: Pointer to the node to start heapifying
- *
- * Return: The final position of the node in the Max Heap
+ * sift_up - Moves a node up in the heap to restore the max heap property
+ * @node: Pointer to the node to sift up
  */
-heap_t *heapify(heap_t *node)
+void sift_up(heap_t **node)
 {
-heap_t *temp;
-int value;
+heap_t *current = *node;
+int temp;
 
-while (node->parent != NULL && node->n > node->parent->n)
+while (current->parent != NULL && current->n > current->parent->n)
 {
-value = node->n;
-node->n = node->parent->n;
-node->parent->n = value;
-temp = node;
-node = node->parent;
-node->parent = temp;
+temp = current->n;
+current->n = current->parent->n;
+current->parent->n = temp;
+current = current->parent;
 }
-
-return (node);
 }
 
 /**
- * heap_insert - Insert a value in a Max Binary Heap
- * @root: Double pointer to the root node of the Heap
- * @value: Value to store in the node to be inserted
+ * heap_insert - Inserts a value in a max binary heap
+ * @root: Double pointer to the root node of the heap
+ * @value: Value to insert
  *
  * Return: Pointer to the created node, or NULL on failure
  */
 heap_t *heap_insert(heap_t **root, int value)
 {
 heap_t *new_node, *current;
+size_t size, index;
 
 if (root == NULL)
 return (NULL);
 
-new_node = binary_tree_node(NULL, value);
+size = binary_tree_size(*root);
+index = size + 1;
+current = *root;
+
+while (index > 1)
+{
+if (index % 2 == 0)
+{
+current = current->left;
+}
+else
+{
+current = current->right;
+}
+index /= 2;
+}
+
+new_node = binary_tree_node(current, value);
 if (new_node == NULL)
 return (NULL);
 
-if (*root == NULL)
-{
+if (current == NULL)
 *root = new_node;
+else if (current->left == NULL)
+current->left = new_node;
+else
+current->right = new_node;
+
+sift_up(&new_node);
+
 return (new_node);
 }
 
-current = *root;
-while (current->left != NULL && current->right != NULL)
-{
-if (binary_tree_size(current->left) <= binary_tree_size(current->right))
-current = current->left;
-else
-current = current->right;
-}
-
-if (current->left == NULL)
-{
-current->left = new_node;
-new_node->parent = current;
-}
-else
-{
-current->right = new_node;
-new_node->parent = current;
-}
-
-return (heapify(new_node));
-}
