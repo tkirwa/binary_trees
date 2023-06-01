@@ -2,20 +2,6 @@
 #include "binary_trees.h"
 
 /**
- * get_tree_size - Computes the size of a binary tree
- * @root: Pointer to the root node of the tree
- *
- * Return: The size of the tree
- */
-size_t get_tree_size(heap_t *root)
-{
-if (root == NULL)
-return (0);
-
-return (1 + get_tree_size(root->left) + get_tree_size(root->right));
-}
-
-/**
  * get_last_node - Returns the last level-order node of a binary tree
  * @root: Pointer to the root node of the tree
  *
