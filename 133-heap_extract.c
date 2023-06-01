@@ -10,9 +10,9 @@
 size_t get_tree_size(heap_t *root)
 {
 if (root == NULL)
-return 0;
+return (0);
 
-return 1 + get_tree_size(root->left) + get_tree_size(root->right);
+return (1 + get_tree_size(root->left) + get_tree_size(root->right));
 }
 
 /**
@@ -27,7 +27,7 @@ heap_t *queue[100], *node = NULL;
 size_t rear = 0, front = 0;
 
 if (root == NULL)
-return NULL;
+return (NULL);
 
 queue[rear++] = root;
 while (front < rear)
@@ -39,7 +39,7 @@ if (node->right != NULL)
 queue[rear++] = node->right;
 }
 
-return node;
+return (node);
 }
 
 /**
@@ -66,7 +66,7 @@ child->n = temp;
 current = child;
 }
 
-return root;
+return (root);
 }
 
 /**
@@ -81,7 +81,7 @@ heap_t *last_node, *current;
 int extracted_value;
 
 if (root == NULL || *root == NULL)
-return 0;
+return (0);
 
 current = *root;
 extracted_value = current->n;
@@ -91,7 +91,7 @@ if (current == last_node)
 {
 free(current);
 *root = NULL;
-return extracted_value;
+return (extracted_value);
 }
 
 current->n = last_node->n;
@@ -105,5 +105,5 @@ free(last_node);
 
 *root = sift_down(*root);
 
-return extracted_value;
+return (extracted_value);
 }
