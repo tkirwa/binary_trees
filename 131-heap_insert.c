@@ -1,27 +1,6 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_node - Creates a binary tree node
- * @parent: Pointer to the parent node
- * @value: Value to be stored in the node
- * Return: Pointer to the new node, or NULL on failure
- */
-binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
-{
-    binary_tree_t *new_node = malloc(sizeof(binary_tree_t));
-    if (new_node == NULL)
-        return NULL;
-
-    new_node->n = value;
-    new_node->parent = parent;
-    new_node->left = NULL;
-    new_node->right = NULL;
-
-    return new_node;
-}
-
-
-/**
  * height - measures the height of a tree
  *
  * @tree: tree root
@@ -57,8 +36,8 @@ if (tree && height(tree->left) == height(tree->right))
 if (height(tree->left) == -1)
 return (1);
 
-if ((tree->left && !(tree->left->left) &&!(tree->left->right))
-&&(tree->right && !(tree->right->left) &&!(tree->right->right)))
+if ((tree->left && !(tree->left->left) && !(tree->left->right))
+&& (tree->right && !(tree->right->left) && !(tree->right->right)))
 return (1);
 
 if (tree && tree->left && tree->right)
@@ -80,19 +59,24 @@ void swap(heap_t **arg_node, heap_t **arg_child)
 {
 heap_t *node, *child, *node_child, *node_left, *node_right, *parent;
 int left_right;
+
 node = *arg_node;
 child = *arg_child;
+
 if (child->n > node->n)
 {
 if (child->left)
 child->left->parent = node;
 if (child->right)
 child->right->parent = node;
+
 if (node->left == child)
 node_child = node->right, left_right = 0;
 else
 node_child = node->left, left_right = 1;
+
 node_left = child->left, node_right = child->right;
+
 if (left_right == 0)
 {
 child->right = node_child;
@@ -107,6 +91,7 @@ if (node_child)
 node_child->parent = child;
 child->right = node;
 }
+
 if (node->parent)
 {
 if (node->parent->left == node)
@@ -114,6 +99,7 @@ node->parent->left = child;
 else
 node->parent->right = child;
 }
+
 parent = node->parent, child->parent = parent;
 node->parent = child, node->left = node_left;
 node->right = node_right, *arg_node = child;
